@@ -9,7 +9,7 @@ ARG CI_COMMIT_SHA
 RUN VERSION=$(./version.sh) gradle -Dorg.gradle.daemon=false build
 RUN tar xf build/distributions/signald.tar -C /opt
 
-FROM gradle:6-jre${JAVA_VERSION:-11} AS release
+FROM openjdk:${JAVA_VERSION:-11}-jre-slim AS release
 
 USER root
 COPY --from=build /opt/signald /opt/signald/
